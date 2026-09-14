@@ -1,546 +1,576 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rivetcairn — Make the Line Make Sense</title>
+<meta name="description" content="Rivetcairn modernizes existing factories with automation engineering — built around the machinery you already own, not in place of it.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='18' fill='%2317110c'/%3E%3Ctext x='50' y='69' font-family='Georgia,serif' font-size='58' fill='%23d1a13a' text-anchor='middle'%3ER%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
 
-  <title>Rivetcairn — Industrial Automation & Engineering</title>
-  <meta name="description" content="Rivetcairn provides industrial automation, custom machinery, robotics, and engineering solutions for modern manufacturing.">
+  :root{
+    --ink: #17110c;
+    --umber: #241a12;
+    --ochre: #d1a13a;
+    --rust: #b8501f;
+    --parchment: #f2e8d2;
+    --clay: #a68f72;
+    --line: rgba(242,232,210,0.12);
+    --max: 1120px;
+  }
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+  *,*::before,*::after{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+
+  body{
+    margin:0;
+    background:var(--ink);
+    color:var(--parchment);
+    font-family:'Inter', -apple-system, sans-serif;
+    font-size:16px;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  h1,h2,h3,.display,nav a,.btn,.wordmark{
+    font-family:'Space Grotesk','Inter',sans-serif;
+  }
+
+  a{ color:inherit; text-decoration:none; }
+
+  :focus-visible{
+    outline:2px solid var(--rust);
+    outline-offset:3px;
+  }
+
+  img,svg{ display:block; max-width:100%; }
+
+  .wrap{
+    max-width:var(--max);
+    margin:0 auto;
+    padding:0 28px;
+  }
+
+  /* ---------- header ---------- */
+
+  header{
+    position:sticky;
+    top:0;
+    z-index:20;
+    background:rgba(23,17,12,0.88);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+
+  .header-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:18px 0;
+  }
+
+  .wordmark{
+    font-weight:700;
+    font-size:1.05rem;
+    letter-spacing:0.06em;
+    color:var(--parchment);
+  }
+
+  .wordmark span{ color:var(--ochre); }
+
+  nav{
+    display:flex;
+    align-items:center;
+    gap:32px;
+  }
+
+  nav a{
+    font-size:0.92rem;
+    color:var(--clay);
+    padding-bottom:2px;
+    border-bottom:1px solid transparent;
+    transition:color .15s ease, border-color .15s ease;
+  }
+
+  nav a:hover{
+    color:var(--parchment);
+    border-color:var(--ochre);
+  }
+
+  .nav-secondary{ display:flex; gap:32px; }
+
+  @media (max-width:640px){
+    .nav-secondary{ display:none; }
+  }
+
+  /* ---------- shared section rhythm ---------- */
+
+  section{
+    padding:96px 0;
+    border-bottom:1px solid var(--line);
+  }
+
+  section:last-of-type{ border-bottom:none; }
+
+  .eyebrow-free-heading{
+    font-weight:600;
+    line-height:1.15;
+    letter-spacing:-0.01em;
+    color:var(--parchment);
+  }
+
+  .section-head{
+    max-width:640px;
+    margin-bottom:56px;
+  }
+
+  .section-head h2{
+    font-size:clamp(1.7rem, 3vw, 2.3rem);
+    margin:0;
+  }
+
+  @media (max-width:640px){
+    section{ padding:64px 0; }
+    .section-head{ margin-bottom:36px; }
+  }
+
+  /* ---------- hero ---------- */
+
+  .hero{
+    padding-top:120px;
+    padding-bottom:120px;
+    position:relative;
+    overflow:hidden;
+  }
+
+  .hero-grid{
+    display:grid;
+    grid-template-columns:1.3fr 0.7fr;
+    gap:48px;
+    align-items:center;
+  }
+
+  @media (max-width:900px){
+    .hero-grid{ grid-template-columns:1fr; }
+    .hero-art{ display:none; }
+  }
+
+  .hero h1{
+    font-size:clamp(3rem, 8vw, 5.4rem);
+    font-weight:700;
+    letter-spacing:-0.02em;
+    line-height:0.98;
+    margin:0 0 28px;
+    color:var(--parchment);
+  }
+
+  .hero h1 em{
+    font-style:normal;
+    color:var(--ochre);
+  }
+
+  .tagline{
+    font-size:clamp(1.15rem, 2.4vw, 1.5rem);
+    font-weight:500;
+    color:var(--ochre);
+    margin:0 0 22px;
+  }
+
+  .hero p{
+    max-width:44ch;
+    font-size:1.08rem;
+    color:var(--clay);
+    margin:0 0 36px;
+  }
+
+  .btn{
+    display:inline-block;
+    font-size:0.95rem;
+    font-weight:500;
+    color:var(--ink);
+    background:var(--ochre);
+    padding:14px 30px;
+    border:1px solid var(--ochre);
+    transition:background .15s ease, color .15s ease, transform .15s ease;
+  }
+
+  .btn:hover{
+    background:transparent;
+    color:var(--ochre);
+  }
+
+  .btn-outline{
+    background:transparent;
+    color:var(--parchment);
+    border:1px solid var(--line);
+  }
+
+  .btn-outline:hover{
+    border-color:var(--ochre);
+    color:var(--ochre);
+  }
+
+  @media (prefers-reduced-motion:no-preference){
+    .hero h1, .tagline, .hero p, .hero .btn{
+      animation:rise .7s ease both;
     }
+    .hero h1{ animation-delay:.02s; }
+    .tagline{ animation-delay:.14s; }
+    .hero p{ animation-delay:.24s; }
+    .hero .btn{ animation-delay:.34s; }
+  }
 
-    html {
-      scroll-behavior: smooth;
-    }
+  @keyframes rise{
+    from{ opacity:0; transform:translateY(14px); }
+    to{ opacity:1; transform:translateY(0); }
+  }
 
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-      color: #171717;
-      background: #ffffff;
-      line-height: 1.6;
-    }
+  /* ---------- philosophy ---------- */
 
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
+  .philosophy .wrap{
+    max-width:820px;
+  }
 
-    .container {
-      width: min(1120px, 90%);
-      margin: auto;
-    }
+  .philosophy h2{
+    font-size:clamp(1.9rem, 4vw, 2.9rem);
+    font-weight:600;
+    line-height:1.2;
+    letter-spacing:-0.01em;
+    margin:0 0 28px;
+  }
 
-    /* NAVIGATION */
+  .philosophy p{
+    font-size:1.08rem;
+    color:var(--clay);
+    max-width:60ch;
+    margin:0 0 16px;
+  }
 
-    nav {
-      height: 82px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      border-bottom: 1px solid #e8e8e8;
-    }
+  .philosophy p:last-child{ margin-bottom:0; }
 
-    .brand {
-      font-size: 22px;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-    }
+  /* ---------- what we do ---------- */
 
-    nav a {
-      font-size: 14px;
-      color: #555;
-      margin-left: 30px;
-    }
+  .capabilities{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:44px;
+  }
 
-    nav a:hover {
-      color: #000;
-    }
+  @media (max-width:800px){
+    .capabilities{ grid-template-columns:1fr; gap:40px; }
+  }
 
-    /* HERO */
+  .capability{
+    border-top:1px solid var(--line);
+    padding-top:24px;
+  }
 
-    .hero {
-      min-height: 650px;
-      display: flex;
-      align-items: center;
-      padding: 90px 0;
-    }
+  .capability svg{
+    width:34px;
+    height:34px;
+    margin-bottom:20px;
+    stroke:var(--ochre);
+  }
 
-    .hero-content {
-      max-width: 850px;
-    }
+  .capability h3{
+    font-size:1.1rem;
+    font-weight:600;
+    margin:0 0 10px;
+    color:var(--parchment);
+  }
 
-    .eyebrow {
-      font-size: 13px;
-      font-weight: 600;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: #666;
-      margin-bottom: 25px;
-    }
+  .capability p{
+    font-size:0.98rem;
+    color:var(--clay);
+    margin:0;
+  }
 
-    h1 {
-      font-size: clamp(52px, 8vw, 96px);
-      line-height: 0.98;
-      letter-spacing: -0.055em;
-      font-weight: 700;
-      margin-bottom: 32px;
-    }
+  /* ---------- process ---------- */
 
-    .tagline {
-      font-size: clamp(22px, 3vw, 32px);
-      line-height: 1.25;
-      color: #444;
-      max-width: 700px;
-      margin-bottom: 28px;
-    }
+  .process-list{
+    display:grid;
+    grid-template-columns:repeat(5, 1fr);
+    gap:0;
+  }
 
-    .intro {
-      font-size: 17px;
-      color: #666;
-      max-width: 650px;
-      margin-bottom: 38px;
-    }
+  @media (max-width:900px){
+    .process-list{ grid-template-columns:1fr; gap:32px; }
+  }
 
-    .button {
-      display: inline-block;
-      padding: 14px 24px;
-      background: #171717;
-      color: white;
-      font-size: 14px;
-      font-weight: 600;
-      border: 1px solid #171717;
-    }
+  .process-step{
+    position:relative;
+    padding:0 20px 0 0;
+    border-left:1px solid var(--line);
+    padding-left:20px;
+  }
 
-    .button:hover {
-      background: white;
-      color: #171717;
-    }
+  .process-list .process-step:first-child{
+    border-left:1px solid var(--rust);
+  }
 
-    /* SECTION */
+  @media (max-width:900px){
+    .process-step{ border-left:1px solid var(--line); }
+    .process-list .process-step:first-child{ border-left:1px solid var(--rust); }
+  }
 
-    section {
-      padding: 110px 0;
-      border-top: 1px solid #e8e8e8;
-    }
+  .process-num{
+    font-family:'Space Grotesk',sans-serif;
+    font-size:0.85rem;
+    color:var(--rust);
+    font-weight:600;
+    margin-bottom:14px;
+  }
 
-    .section-heading {
-      display: grid;
-      grid-template-columns: 1fr 2fr;
-      gap: 60px;
-      margin-bottom: 65px;
-    }
+  .process-step h3{
+    font-size:1.02rem;
+    font-weight:600;
+    color:var(--parchment);
+    margin:0 0 10px;
+  }
 
-    .section-number {
-      font-size: 13px;
-      color: #777;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-    }
+  .process-step p{
+    font-size:0.92rem;
+    color:var(--clay);
+    margin:0;
+  }
 
-    h2 {
-      font-size: clamp(34px, 5vw, 56px);
-      line-height: 1.05;
-      letter-spacing: -0.04em;
-    }
+  /* ---------- contact ---------- */
 
-    .section-description {
-      font-size: 18px;
-      color: #666;
-      max-width: 700px;
-      margin-top: 22px;
-    }
+  .contact{
+    background:var(--umber);
+  }
 
-    /* SERVICES */
+  .contact .wrap{
+    max-width:720px;
+  }
 
-    .services {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      border-top: 1px solid #ddd;
-    }
+  .contact h2{
+    font-size:clamp(1.9rem, 4vw, 2.7rem);
+    font-weight:600;
+    color:var(--ochre);
+    margin:0 0 20px;
+    letter-spacing:-0.01em;
+  }
 
-    .service {
-      padding: 40px 30px 40px 0;
-      border-bottom: 1px solid #ddd;
-    }
+  .contact p{
+    font-size:1.05rem;
+    color:var(--clay);
+    max-width:52ch;
+    margin:0 0 40px;
+  }
 
-    .service:nth-child(odd) {
-      border-right: 1px solid #ddd;
-      padding-right: 50px;
-    }
+  .contact-links{
+    display:flex;
+    flex-wrap:wrap;
+    gap:16px;
+  }
 
-    .service:nth-child(even) {
-      padding-left: 50px;
-    }
+  .contact-link{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    border:1px solid var(--line);
+    padding:16px 24px;
+    font-size:0.98rem;
+    color:var(--parchment);
+    transition:border-color .15s ease, color .15s ease;
+  }
 
-    .service h3 {
-      font-size: 23px;
-      margin-bottom: 14px;
-    }
+  .contact-link:hover{
+    border-color:var(--ochre);
+    color:var(--ochre);
+  }
 
-    .service p {
-      color: #666;
-      max-width: 450px;
-    }
+  .contact-link svg{
+    width:18px;
+    height:18px;
+    stroke:currentColor;
+    flex-shrink:0;
+  }
 
-    /* PROCESS */
+  /* ---------- footer ---------- */
 
-    .process {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 25px;
-    }
+  footer{
+    padding:36px 0;
+  }
 
-    .process-step {
-      border-top: 2px solid #171717;
-      padding-top: 20px;
-    }
+  .footer-row{
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    font-size:0.85rem;
+    color:var(--clay);
+  }
 
-    .process-step span {
-      font-size: 13px;
-      color: #777;
-      display: block;
-      margin-bottom: 20px;
-    }
+  .footer-row .wordmark{
+    font-size:0.92rem;
+  }
 
-    .process-step h3 {
-      font-size: 21px;
-      margin-bottom: 10px;
-    }
+  @media (prefers-reduced-motion:reduce){
+    *{ animation:none !important; transition:none !important; }
+  }
 
-    .process-step p {
-      font-size: 14px;
-      color: #666;
-    }
-
-    /* CONTACT */
-
-    .contact {
-      background: #f5f5f5;
-    }
-
-    .contact-content {
-      max-width: 800px;
-    }
-
-    .contact h2 {
-      margin-bottom: 25px;
-    }
-
-    .contact p {
-      font-size: 18px;
-      color: #555;
-      margin-bottom: 35px;
-    }
-
-    .email {
-      font-size: 22px;
-      font-weight: 600;
-      border-bottom: 1px solid #171717;
-      padding-bottom: 4px;
-    }
-
-    /* FOOTER */
-
-    footer {
-      padding: 35px 0;
-      font-size: 13px;
-      color: #777;
-    }
-
-    .footer-content {
-      display: flex;
-      justify-content: space-between;
-    }
-
-    /* MOBILE */
-
-    @media (max-width: 700px) {
-      nav {
-        height: 70px;
-      }
-
-      nav .links {
-        display: none;
-      }
-
-      .hero {
-        min-height: 600px;
-        padding: 70px 0;
-      }
-
-      .section-heading {
-        grid-template-columns: 1fr;
-        gap: 20px;
-      }
-
-      .services {
-        grid-template-columns: 1fr;
-      }
-
-      .service:nth-child(odd) {
-        border-right: none;
-        padding-right: 0;
-      }
-
-      .service:nth-child(even) {
-        padding-left: 0;
-      }
-
-      .process {
-        grid-template-columns: 1fr;
-        gap: 45px;
-      }
-
-      .footer-content {
-        flex-direction: column;
-        gap: 10px;
-      }
-    }
-  </style>
+</style>
 </head>
-
 <body>
 
-  <div class="container">
-
+<header>
+  <div class="wrap header-row">
+    <a href="#top" class="wordmark">RIVET<span>CAIRN</span></a>
     <nav>
-      <a href="#" class="brand">RIVETCAIRN</a>
-
-      <div class="links">
-        <a href="#capabilities">Capabilities</a>
+      <div class="nav-secondary">
         <a href="#approach">Approach</a>
-        <a href="#contact">Contact</a>
+        <a href="#work">How We Work</a>
       </div>
+      <a href="#contact">Contact</a>
     </nav>
-
   </div>
-
-
-  <!-- HERO -->
-
-  <main>
-
-    <div class="container">
-
-      <section class="hero" style="border-top: none;">
-
-        <div class="hero-content">
-
-          <div class="eyebrow">
-            Industrial Automation & Engineering
-          </div>
-
-          <h1>
-            Make the Line<br>
-            Make Sense.
-          </h1>
-
-          <p class="tagline">
-            Engineering automation for modern manufacturing.
-          </p>
-
-          <p class="intro">
-            Rivetcairn develops practical automation and engineering
-            solutions for industrial processes — from custom machinery
-            and robotic systems to complete production-line integration.
-          </p>
-
-          <a href="#contact" class="button">
-            Start a conversation →
-          </a>
-
-        </div>
-
-      </section>
-
-
-      <!-- CAPABILITIES -->
-
-      <section id="capabilities">
-
-        <div class="section-heading">
-
-          <div class="section-number">
-            01 / Capabilities
-          </div>
-
-          <div>
-            <h2>
-              Built around<br>
-              the problem.
-            </h2>
-
-            <p class="section-description">
-              Every production environment is different. We engineer
-              automation around the process, rather than forcing the
-              process to fit a standard machine.
-            </p>
-          </div>
-
-        </div>
-
-
-        <div class="services">
-
-          <div class="service">
-            <h3>Industrial Automation</h3>
-            <p>
-              Automation systems designed to improve productivity,
-              consistency and efficiency across manufacturing operations.
-            </p>
-          </div>
-
-          <div class="service">
-            <h3>Custom Machinery</h3>
-            <p>
-              Special-purpose machines and automated equipment built
-              around specific production requirements.
-            </p>
-          </div>
-
-          <div class="service">
-            <h3>Robotic Systems</h3>
-            <p>
-              Robotic cells for material handling, assembly, machine
-              tending, inspection and repetitive industrial processes.
-            </p>
-          </div>
-
-          <div class="service">
-            <h3>Engineering & Integration</h3>
-            <p>
-              Controls, electrical systems, sensors, machine vision and
-              integration of automation into existing production lines.
-            </p>
-          </div>
-
-        </div>
-
-      </section>
-
-
-      <!-- APPROACH -->
-
-      <section id="approach">
-
-        <div class="section-heading">
-
-          <div class="section-number">
-            02 / Approach
-          </div>
-
-          <div>
-            <h2>
-              From process<br>
-              to production.
-            </h2>
-
-            <p class="section-description">
-              We start by understanding the manufacturing problem and
-              work toward an engineered solution that makes operational
-              and economic sense.
-            </p>
-          </div>
-
-        </div>
-
-
-        <div class="process">
-
-          <div class="process-step">
-            <span>01</span>
-            <h3>Understand</h3>
-            <p>
-              Study the process, constraints and production requirements.
-            </p>
-          </div>
-
-          <div class="process-step">
-            <span>02</span>
-            <h3>Engineer</h3>
-            <p>
-              Develop the machine, automation architecture and controls.
-            </p>
-          </div>
-
-          <div class="process-step">
-            <span>03</span>
-            <h3>Build</h3>
-            <p>
-              Source, fabricate and assemble the system with our network
-              of technical partners.
-            </p>
-          </div>
-
-          <div class="process-step">
-            <span>04</span>
-            <h3>Integrate</h3>
-            <p>
-              Deploy the solution and integrate it into the production
-              environment.
-            </p>
-          </div>
-
-        </div>
-
-      </section>
-
-
-      <!-- CONTACT -->
-
-      <section id="contact" class="contact">
-
-        <div class="contact-content">
-
-          <div class="eyebrow">
-            03 / Contact
-          </div>
-
-          <h2>
-            Have a process<br>
-            worth automating?
-          </h2>
-
-          <p>
-            Tell us what you're trying to improve. We can explore the
-            process, identify opportunities and work toward a practical
-            automation solution.
-          </p>
-
-          <!-- Replace this email when your business email is ready -->
-          <a href="mailto:hello@rivetcairn.in" class="email">
-            hello@rivetcairn.in
-          </a>
-
-        </div>
-
-      </section>
-
-    </div>
-
-  </main>
-
-
-  <div class="container">
-
-    <footer>
-
-      <div class="footer-content">
-
-        <span>© 2026 Rivetcairn</span>
-
-        <span>Make the Line Make Sense.</span>
-
+</header>
+
+<main id="top">
+
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <h1>RIVET<em>CAIRN</em></h1>
+        <p class="tagline">Make the Line Make Sense.</p>
+        <p>We study how your factory actually runs, then engineer the automation around it — without tearing out the machinery you've already paid for.</p>
+        <a href="#contact" class="btn">Get in touch</a>
       </div>
+      <div class="hero-art" aria-hidden="true">
+        <svg viewBox="0 0 220 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <ellipse cx="110" cy="268" rx="86" ry="24" stroke="#d1a13a" stroke-width="1.4"/>
+          <ellipse cx="118" cy="205" rx="66" ry="21" stroke="#d1a13a" stroke-width="1.4"/>
+          <ellipse cx="102" cy="146" rx="50" ry="17" stroke="#b8501f" stroke-width="1.4"/>
+          <ellipse cx="112" cy="96" rx="34" ry="13" stroke="#d1a13a" stroke-width="1.4"/>
+          <ellipse cx="106" cy="56" rx="19" ry="9" stroke="#d1a13a" stroke-width="1.4"/>
+        </svg>
+      </div>
+    </div>
+  </section>
 
-    </footer>
+  <section class="philosophy" id="approach">
+    <div class="wrap">
+      <h2>Don't replace a factory. Modernize it.</h2>
+      <p>Most of what's already on your floor still works. Rivetcairn maps how it runs — every machine, bottleneck, manual step, and quality checkpoint — and designs automation that fits around it instead of replacing it outright.</p>
+      <p>Less capital at risk, a shorter path to running, and a factory that keeps the equipment you already know.</p>
+    </div>
+  </section>
 
+  <section id="what-we-do">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>What we do</h2>
+      </div>
+      <div class="capabilities">
+        <div class="capability">
+          <svg viewBox="0 0 40 40" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+            <rect x="6" y="20" width="5" height="12"/>
+            <rect x="15" y="14" width="5" height="18"/>
+            <rect x="24" y="8" width="5" height="24"/>
+            <circle cx="30" cy="10" r="5"/>
+            <line x1="33.5" y1="13.5" x2="37" y2="17"/>
+          </svg>
+          <h3>Factory assessment</h3>
+          <p>We walk the floor, time the cycles, and map bottlenecks and manual steps into a single Automation Report.</p>
+        </div>
+        <div class="capability">
+          <svg viewBox="0 0 40 40" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="9" cy="30" r="4"/>
+            <circle cx="31" cy="30" r="4"/>
+            <circle cx="20" cy="9" r="4"/>
+            <line x1="12.3" y1="28" x2="17.5" y2="12"/>
+            <line x1="27.7" y1="28" x2="22.5" y2="12"/>
+            <line x1="13" y1="30" x2="27" y2="30"/>
+          </svg>
+          <h3>Systems design &amp; integration</h3>
+          <p>Conveyors, robotic arms, sensors, machine vision, PLCs and SCADA, specified around the machinery you already own.</p>
+        </div>
+        <div class="capability">
+          <svg viewBox="0 0 40 40" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+            <rect x="7" y="7" width="26" height="26"/>
+            <path d="M13 20l5 5 10-11"/>
+          </svg>
+          <h3>Implementation</h3>
+          <p>We source, build, program, test and install the system on your floor, and stay until it runs the way it was designed to.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="work">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>How we work</h2>
+      </div>
+      <div class="process-list">
+        <div class="process-step">
+          <div class="process-num">01</div>
+          <h3>Factory visit</h3>
+          <p>We see how production actually happens, not how it's described on paper.</p>
+        </div>
+        <div class="process-step">
+          <div class="process-num">02</div>
+          <h3>Production analysis</h3>
+          <p>Cycle times, bottlenecks, manual steps and material flow, mapped in detail.</p>
+        </div>
+        <div class="process-step">
+          <div class="process-num">03</div>
+          <h3>Automation report</h3>
+          <p>A complete picture of the floor and where automation will matter most.</p>
+        </div>
+        <div class="process-step">
+          <div class="process-num">04</div>
+          <h3>Proposed system</h3>
+          <p>Hardware and controls specified around your existing equipment.</p>
+        </div>
+        <div class="process-step">
+          <div class="process-num">05</div>
+          <h3>Implementation</h3>
+          <p>Sourced, built, programmed, tested and installed on your floor.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <div class="wrap">
+      <h2>Make the Line Make Sense.</h2>
+      <p>Tell us about your factory and we'll start with a conversation about how the line runs today.</p>
+      <div class="contact-links">
+        <a class="contact-link" href="mailto:pranavrewanwar@gmail.com">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+            <rect x="3" y="5" width="18" height="14" rx="1"/>
+            <path d="M3 6l9 7 9-7"/>
+          </svg>
+          pranavrewanwar@gmail.com
+        </a>
+        <a class="contact-link" href="https://instagram.com/rivetcairn" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+            <rect x="3" y="3" width="18" height="18" rx="5"/>
+            <circle cx="12" cy="12" r="4.2"/>
+            <circle cx="17.2" cy="6.8" r="1"/>
+          </svg>
+          @rivetcairn
+        </a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap footer-row">
+    <span class="wordmark">RIVET<span style="color:var(--ochre)">CAIRN</span></span>
+    <span>Mumbai, India</span>
+    <span>&copy; 2026 Rivetcairn. Make the Line Make Sense.</span>
   </div>
+</footer>
 
 </body>
 </html>
